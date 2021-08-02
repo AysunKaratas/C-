@@ -1,0 +1,257 @@
+﻿@using asp_net_ef_codefirst.ViewModels
+@model HomePageViewModel
+
+
+<html>
+
+<head>
+
+    <style>
+
+        .linkler {
+            font-size: 20px;
+            color: darkcyan;
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />
+
+
+    <!-- jQuery -->
+
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Uygulama</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@Url.Action("HomePage","Home")">Ana Sayfa</a>
+                    </li>
+                    <li>
+                        <a href="#">Duyurular</a>
+                    </li>
+                    <li>
+                        <a href="#">Son Yazılanlar</a>
+                    </li>
+                    <li>
+                        <a href="#">Hakkımızda</a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a href="#">T.C'niz : @Model.TC</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Login","Home")"> Çıkış Yap </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+        @* Bu classı container olan div sayfanın tamamını temsil eder. body'nin altına açılır. *@
+
+        <div class="row">
+            @* Bir satır anlamına gelir. row classı içinde yazılan tüm divler yan yana durur. *@
+
+            <div class="col-md-4">
+                @* satırın 4 hücresine yazılacak şeyler için.*@
+
+                <center> <h2> Listeler </h2> </center>
+
+                <div class="list-group">
+
+                    @foreach (var i in Model.Categoris)
+                    {     @* kategori listeleme metoduna geliyoruz ve onclick veriyoruz tıklanma işlemi gercekleşmesi için ıd veriyoruz kategori ıd ve kategoriadı listelnem işlemi gercekleşiyor.*@
+                        <a href="#" class="list-group-item" onclick="GorevListe(@i.Id)"> @(i.KategoriAdi) </a>
+                        @* a href içi boş olmaması gerekiyor yoksa diğer türlü geliyor hemen gidiyor orda sabit kalmıyor.*@
+                    }
+
+                </div>
+                <div>
+
+                    @using (Html.BeginForm("CategoriEkle", "Categori", FormMethod.Post))
+                    {
+                        @*Post metodu olmak zorunda çünkü sayfa açmıyoruz.Aynı zamanda bir sayfada bir model olur o yüzden katgeori model yerine homeviewmodel e kategoriadını eklemiş olduk. *@
+                        <div class="input-group">
+                            <span class="input-group-addon"> Kategori Ad</span>
+                            @Html.TextBoxFor(x => x.KategoriAdi, new { @class = "form-control", placeholder = " Kategori Adı", aria_describedby = "txtad1" })
+                        </div>
+                        <div class="input-group" style="float:right;">
+                            @* style  kısmı butonun sag tarafa geçmesini saglıyor.*@
+                        <br />
+                        <input type="submit" value="Ekle" class="btn btn-danger" />@*Beginform içindeki button submit olması gerekiyor işlem yapabilmesi için*@
+
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+
+            <div class="col-md-8">
+                @* satırın 4 hücresine yazılacak şeyler için.*@
+
+                <div class="row">
+                    <div class="col-11">
+                        <h2>Listeye Görev Ekle</h2>
+                    </div>
+
+                    @using (Html.BeginForm("GorevEkle", "Gorev", FormMethod.Post))
+                    {
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Görev Adı</span>
+                                    @Html.TextBoxFor(a => a.GorevAdi, new { @class = "form-control", placeholder = "Görev Adı", aria_describedy = "txtad1" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Kategori Seçiniz</span> @*Kategorilerin combobox da listelenmesini sağlıyoruz.*@
+                                    <select class="form-control" name="KategoriId">
+                                        @foreach (var kategori in Model.Categoris)
+                                        {
+                                            <option value="@kategori.Id"> @kategori.KategoriAdi </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="submit" value="Ekle" class="btn btn-danger" />
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                    <br />
+
+                </div>
+
+                <div id="GorevListele"></div>@*Menüye tıklandığı zaman o sayfaya gitmesi için bir div oluşturduk daha sonra javascript dosyası oluşturduk*@
+               
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+
+<div id="GuncellemePopUp"></div>@* yukarda vereceğimiz kullanacağımız pop up ismi farklı sayfaya yönelmek için aynı sayfada olmamıza ragmen*@
+
+
+<script type="text/javascript" src="../../plugins/jquery/jquery.min.js"></script>
+@*javascript dosyamız*@
+
+<script>
+    function GuncellePopUpAc(guncellenecekId) {  @* javascript dosyamız yukarıyla aynı isim olacak*@
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Update","Gorev")',@* Hangi metotda kullanacağız onları yazıyoruz*@
+            data: { guncellenecekId: guncellenecekId },
+            success: function (datas) {
+                $("#GuncellemePopUp").html(datas);
+                $("#myModal").modal("show");@* myModal  modal id si. Bu işlemler bitince controller geciyoruz*@
+            },
+            error: function (ex) {
+                alert("Güncelleme sayfanız açılamadı.");
+            }
+        });
+    }
+    @* Kategoriye tıkladığmız zaman onun verileri yani görevleri listeleneceği için o yüzden kategoriıd verdik*@
+    function GorevListe(kategoriId) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Gorev","Gorev")',@* Görev action ve görev controları yazıyoruz*@
+            data: { kategoriId: kategoriId }, @* Kategoriıd ye göre yapıyoruz *@
+            success: function (datas) {
+                $("#GorevListele").html(datas);@* Görev listele metodunu yazıyoruz yani burda o metodu çağırma işlemini gercekleştiriyoruz.*@
+            },
+            error: function (ex) {
+                alert("Görev listesi sayfanız açılamadı.");
+            }
+        });
+    }
+
+    function Silme(silinecekId) {  @* javascript dosyamız yukarıyla aynı isim olacak.Burası için bir başka işlem olmayacak sadece tıklandığında silineceği için mesela bir listeleme,veya popup açma olmayacagı için div oluşturmaya gerek kalmıyor.*@
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Delete","Gorev")',@* Hangi metotda kullanacağız onları yazıyoruz*@
+            data: { silinecekId: silinecekId },
+            success: function (datas) {
+                alert("Görev başarıyla silindi.");
+                location.reload();
+            },
+            error: function (ex) {
+                alert("Silme tamamlanmadı.");
+            }
+        });
+    }
+
+    @* Listele işlemleri burda olur sayfa başka yerde olabiliyormuş böyle birşey olduğunu görüyoruz.*@
+</script>

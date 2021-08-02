@@ -1,0 +1,33 @@
+﻿@using asp_net_ef_codefirst.ViewModels
+@model HomePageViewModel
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+
+    <thead>
+        <tr>
+            <th>Görev Adı</th>
+            <th>Kategori Adı</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.KategoriAdiListeleListesi)
+        {
+            <tr>
+                <td>@item.Gorevler.GorevAdi</td>
+                <td>@item.KategoriAdi</td>
+                <td><button class="btn-info" id="Guncelle" onclick="GuncellePopUpAc(@item.Gorevler.Id)">Güncelle</button></td>
+                @* Buton ıd veriyoruz ve Onclick java dosyasını eklemek için verdik .Id verdik çağırmak için*@
+
+                <td>
+                    @* Ve ıd gönderdiğimiz için homeviw açıyoruz.Görevler burda listenen yerde yani veriyi çektiğimiz yerde alıyoruz.*@
+                    <button type="submit" class="btn-danger" onclick="Silme(@item.Gorevler.Id)">Sil</button>@*Silme isim olarak verdi.*@
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

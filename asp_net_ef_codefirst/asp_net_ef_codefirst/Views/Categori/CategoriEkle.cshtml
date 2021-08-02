@@ -1,0 +1,17 @@
+﻿
+@model asp_net_ef_codefirst.Models.KategorilerModel
+<h2>Yeni Categori</h2>
+<hr />
+@using (Html.BeginForm("CategoriEkle", "Categori", FormMethod.Post))
+{
+    <div class="input-group">
+        <span class="input-group-addon"> Kategori Ad</span>
+        @Html.TextBoxFor(x => x.KategoriAdi, new { @class = "form-control", placeholder = " Kategori Adı", aria_describedby = "txtad1" })
+    </div>
+    <div class="input-group">
+        <input type="submit" value="Ekle" class="btn btn-success" />
+
+    </div>
+}
+
+

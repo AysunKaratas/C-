@@ -1,0 +1,26 @@
+﻿
+@model asp_net_ef_codefirst.Models.GorevModel
+<h2>Görev Ekle </h2>
+<hr />
+@using (Html.BeginForm("GorevEkle", "Gorev", FormMethod.Post))
+{
+    <div class="input-group">
+        <span class="input-group-addon">Görev Adı</span>
+        @Html.TextBoxFor(a => a.GorevAdi, new { @class = "form-control", placeholder = "Görev Adı", aria_describedy = "txtad1" })
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">Kategori Seçiniz</span> @*Kategorilerin combobox da listelenmesini sağlıyoruz.*@
+        <select class="form-control" name="KategoriId"> 
+            @foreach (var kategori in Model.Kategoriler)
+            {
+                <option value="@kategori.Id"> @kategori.KategoriAdi </option>
+            }
+        </select>
+    </div>
+
+    <div class="input-group">
+        <input type="submit" value="Ekle" class="btn btn-success" />
+    </div>
+}
+

@@ -1,0 +1,124 @@
+﻿@model asp_net_ef_codefirst.Models.KayitOlModel
+
+<!--A Design by W3layouts
+   Author: W3layout
+   Author URL: http://w3layouts.com
+   License: Creative Commons Attribution 3.0 Unported
+   License URL: http://creativecommons.org/licenses/by/3.0/
+   -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Gaze Sign up & login Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <script>
+        addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
+    </script>
+    <!-- Meta tags -->
+    <!--stylesheets-->
+    <link href="~/web/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//style sheet end here-->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+</head>
+<body>
+    <div class="mid-class">
+        <div class="art-right-w3ls">
+            <h2>Kaydol Veya Giriş Yap</h2>
+            @*<form action="#" method="post">*@
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+            {
+                <div class="main">
+                    <div class="form-left-to-w3l">
+                        <input type="text" name="UserName" placeholder="Kullanıcı Adınız" required="">
+                    </div>
+                    <div class="form-left-to-w3l ">
+                        <input type="password" name="Password" placeholder="Şifreniz" required="">
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="left-side-forget">
+                    <input type="checkbox" class="checked">
+                    <span class="remenber-me">Beni Hatırla </span>
+                </div>
+                <div class="right-side-forget">
+                    <a href="#" class="for">Şifremi Unuttum...?</a>
+                </div>
+                <div class="clear"></div>
+                <div class="btnn">
+                    <button type="submit">Giriş Yap</button>
+                </div>
+            }
+
+            @*</form>*@
+            <div class="w3layouts_more-buttn">
+                <h3>
+                    Hesabınız yok mu..?
+                    <a href="#content1">
+                        Kayıt ol
+                    </a>
+                </h3>
+            </div>
+            <!-- popup-->
+            <div id="content1" class="popup-effect">
+                <div class="popup">
+                    <!--login form-->
+                    <div class="letter-w3ls">
+                        @*<form action="#" method="post">*@
+                        @using (Html.BeginForm("KayitOl", "Home", FormMethod.Post))
+                        {
+                          @*  <div class="form-left-to-w3l">
+                                <input type="text" name="TC" placeholder="TC" required="">
+                            </div>
+                            <div class="form-left-to-w3l">
+                                <input type="text" name="Password" placeholder="Şifre" required="">
+                            </div>
+                            <div class="form-left-to-w3l">
+                                <input type="text" name="Telephone" placeholder="Telefon" required="">
+                            </div>
+                            <div class="btnn">
+                                <button type="submit">Kayıt OL</button>0
+                                <br>
+                            </div>*@
+
+                             <div>
+                                @Html.TextBoxFor(m => m.TC, new { @class = "form-control",placeholder="TC" })
+                                @Html.ValidationMessageFor(m => m.TC, "", new { @style = "color=red" })
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(a => a.Password, new { @class = "form-control",placeholder="Şifre" })
+                                @Html.ValidationMessageFor(a => a.Password, "", new { @style = "color=red" })
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(b => b.Telephone, new { @class = "form-control",placeholder="Telefon" })
+                                @Html.ValidationMessageFor(b => b.Telephone, "", new { @style = "color=red" })
+                            </div>
+                                <div class="btnn">
+                             <button type="submit">Kayıt OL</button>
+                                <br>
+                              </div>
+                            
+
+                        }
+
+                        @*</form>*@
+                        <div class="clear"></div>
+                    </div>
+                    <!--//login form-->
+                    <a class="close" href="#">&times;</a>
+                </div>
+            </div>
+            <!-- //popup -->
+        </div>
+        <div class="art-left-w3ls">
+            <h1 class="header-w3ls">
+                MİRA
+            </h1>
+        </div>
+    </div>
+    <footer class="bottem-wthree-footer">
+    </footer>
+</body>
+</html>
